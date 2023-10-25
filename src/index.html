@@ -15,6 +15,9 @@
     rel="stylesheet"
     href="/Users/paolamilanes/SheCodes/codes-plus/src/weatherapp/src/style.css"
     />
+    <script
+      src="https://unpkg.com/axios/dist/axios.min.js">
+    </script>
 </head>
 <body>
     <div class="container">
@@ -36,7 +39,7 @@
                 </div>
             </form>
         </div>
-        <h1 class = "city-search">San Jose, California</h1>
+        <h1 class = "city-search" id ="city-search" >San Jose, California</h1>
         <h2 class = "time">
             wednesday 10:12pm 
         </h2>
@@ -47,8 +50,8 @@
                 /Users/paolamilanes/SheCodes/codes-plus/src/weatherapp/src/img/partly_cloudy.png
                 alt="cludy day">
             </div>
-            <div class="col-4" id="temperature">
-                <span class="temperature"> 75 </span>
+            <div class="col-4" >
+                <span class="temperature" id="temperature"> 75 </span>
                 <span class="units">
                     <a href="#" id = "celsius-link" style="text-decoration: none">°C </a>
                     | 

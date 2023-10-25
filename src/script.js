@@ -1,19 +1,20 @@
 
 let months = [
-'January', 
-'February', 
-'March', 
-'April', 
-'May', 
-'June', 
-'July', 
-'August', 
-'September', 
-'October', 
-'November', 
-'December']
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 let days = [
-    "Sunday",
+  "Sunday",
   "Monday",
   "Tuesday",
   "Wednesday",
@@ -23,29 +24,39 @@ let days = [
 ];
 
 let time = document.querySelector(".time");
-let now = new Date()
+let now = new Date();
 let moth = now.getMonth();
-let day = now.getDay()
-let date = now.getDate()
-let hour = now.getHours()
-let minutes = now.getMinutes()
+let day = now.getDay();
+let date = now.getDate();
+let hour = now.getHours();
+let minutes = now.getMinutes();
+
+// let newCity = document.querySelector(".city-search")
+
 
 // console.log(now.getDate())
 
-time.innerHTML=`${days[day]}, ${months[moth]} ${date}   ${hour}:${minutes}`
+time.innerHTML = `${days[day]}, ${months[moth]} ${date}   ${hour}:${minutes}`;
 
-function searchCityName(event){
-    event.preventDefault()
-    let searchInput = document.querySelector("#search-text-input");
-    console.log(searchInput.value)
-    let newCity = document.querySelector(".city-search");
-    newCity.innerHTML = `${searchInput.value}`
-    // cityName.innerHTML = 
+function showTemperature(Response) {
+console.log(Response.data.name)
+document.querySelector(".city-search").innerHTML = Response.data.name;
+document.querySelector(".temperature").innerHTML = Math.round(Response.data.main.temp);
+}
+
+function searchCityName(event) {
+  event.preventDefault();
+  let apiKey = "68dec89f5577f56bb12d71530e92be60";
+  let city = document.querySelector("#search-text-input").value;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q= ${city}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(showTemperature);
+
+
 }
 
 function convertionCelsius(event) {
-    event.preventDefault();
-    temperature.innerHTML = "24  ";
+  event.preventDefault();
+  temperature.innerHTML = "24  ";
 }
 
 function convertionFarenheight(event) {
@@ -55,10 +66,9 @@ function convertionFarenheight(event) {
 let form = document.querySelector(".form-control");
 // console.log(form)
 
-form.addEventListener("submit", searchCityName)
+form.addEventListener("submit", searchCityName);
 
 let temperature = document.querySelector(".temperature");
-
 
 let fahrenheit = document.querySelector("#fahrenheit-link");
 fahrenheit.addEventListener("click", convertionFarenheight);
