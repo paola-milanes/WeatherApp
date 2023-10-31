@@ -39,9 +39,15 @@ let minutes = now.getMinutes();
 time.innerHTML = `${days[day]}, ${months[moth]} ${date}   ${hour}:${minutes}`;
 
 function showTemperature(Response) {
-console.log(Response.data.name)
+console.log(Response.data)
 document.querySelector(".city-search").innerHTML = Response.data.name;
 document.querySelector(".temperature").innerHTML = Math.round(Response.data.main.temp);
+// document.querySelector("#Percipitation").innerHTML = `Percipitation:${Response.data.speed}`;
+document.querySelector("#Humidity").innerHTML = `Humidity: ${Response.data.main.humidity} %`;
+let wind = Math.round(Response.data.wind.speed)
+document.querySelector("#Wind").innerHTML = `Wind: ${wind} mph`;
+document.querySelector("#Forecast").innerHTML = Response.data.weather[0].description;
+
 }
 
 function searchCityName(event) {
@@ -50,21 +56,28 @@ function searchCityName(event) {
   let city = document.querySelector("#search-text-input").value;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q= ${city}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(showTemperature);
+  
+ 
 
 
 }
 
+
 function convertionCelsius(event) {
-  event.preventDefault();
-  temperature.innerHTML = "24  ";
+    event.preventDefault();
+    temperature.innerHTML = "24  ";
 }
 
 function convertionFarenheight(event) {
-  event.preventDefault();
-  temperature.innerHTML = "75   ";
+    event.preventDefault();
+    temperature.innerHTML = "75   ";
 }
+
+
+
+
 let form = document.querySelector(".form-control");
-// console.log(form)
+
 
 form.addEventListener("submit", searchCityName);
 
